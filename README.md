@@ -14,7 +14,8 @@
 **시맨틱 마크업 · 웹 접근성**
 - `header` / `nav` / `aside` / `main` / `section` / `footer`로 영역을 나누고, 제목을 `h1 → h2 → h3` 순서로 구성
 - 메뉴와 저장소 목록은 `ul > li > a`, 검색창과 필터는 `form role="search"` + `label`로 작성
-- 아이콘만 있는 버튼에는 `aria-label`, 장식용 아이콘에는 `aria-hidden`, 그래프 SVG에는 대체 텍스트(`role="img"` + `aria-label`) 적용
+- 아이콘만 있는 버튼에는 `aria-label`, 장식용 아이콘에는 `aria-hidden`, 
+  그래프 SVG에는 대체 텍스트(`role="img"` + `aria-label`) 적용
 - 현재 메뉴 `aria-current="page"`, 본문 바로가기 링크, 키보드 포커스 표시(`:focus-visible`)
 
 **레이아웃 · 반응형**
