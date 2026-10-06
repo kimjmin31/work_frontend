@@ -1,0 +1,130 @@
+/* 기본 */
+body {
+  font-family: "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  color: #333333;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+/* 헤더 */
+.header {
+  background-color: #c8f2c2;
+  color: #1f4d1a;
+}
+
+/* 입력 줄 */
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.row span {
+  width: 90px;
+}
+
+.field {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.field:focus {
+  outline: none;
+  border-color: #6366f1;
+}
+
+textarea.field {
+  height: 70px;
+}
+
+/* 768px 이상이면 라벨과 입력칸을 가로로 */
+@media (min-width: 768px) {
+  .row {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+/* 버튼 */
+.btn {
+  padding: 8px;
+  border-radius: 4px;
+  color: #ffffff;
+  font-size: 14px;
+}
+
+#cancelBtn {
+  display: none;
+}
+
+/* 할일 카드 */
+.card {
+  padding: 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background-color: #ffffff;
+}
+
+.card-title {
+  color: #22c55e;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.card-text {
+  min-height: 70px;
+  margin-bottom: 8px;
+  padding: 10px;
+  border: 1px solid #f1f5f9;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.check-btn {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #cbd5e1;
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 11px;
+}
+
+/* 완료된 카드 */
+.done {
+  opacity: 0.6;
+}
+
+.done .card-title {
+  text-decoration: line-through;
+}
+
+.done .check-btn {
+  background-color: #22c55e;
+  border-color: #22c55e;
+}
+
+/* 수정 모드 */
+.edit-mode #submitBtn {
+  background-color: #6366f1;
+}
+
+.edit-mode #cancelBtn {
+  display: block;
+}
+
+.editing {
+  border-color: #6366f1;
+  background-color: #eef2ff;
+}

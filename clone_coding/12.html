@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Repositories</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="repo_style.css">
+<script src="https://kit.fontawesome.com/b853f0ae27.js" crossorigin="anonymous"></script>
+<link rel="icon" href="C:\Users\kimjm\Documents\ax_study\07_frontend_basic\works\project\img\favicon.ico">
+</head>
+<body>
+
+<!-- ============================================================
+     [상단 헤더] 로고 + 검색창 + 우측 아이콘/아바타
+============================================================ -->
+<header class="top-header">
+  <!-- 햄버거 메뉴 버튼 -->
+  <button class="icon-btn">
+    <i class="fa-solid fa-bars"></i>
+  </button>
+
+  <!-- GitHub 옥토캣 로고 + "Repositories" 페이지 제목 -->
+  <div class="logo-title">
+    <i class="fa-brands fa-github"></i>
+    <span>Repositories</span>
+  </div>
+
+  <!-- 중앙 검색창 + 코파일럿 버튼 -->
+  <div class="header-search">
+    <div class="search-box">
+      <i class="fa-solid fa-magnifying-glass search-box-icon"></i>
+      <div class="search-box-inner">
+        <input type="text" class="search-input" placeholder="">
+        <div class="fake-placeholder">
+          <span>Type</span><span class="kbd">/</span><span>to search</span>
+        </div>
+      </div>
+    </div>
+
+    <button class="icon-btn-outline copilot-btn">
+      <span class="btn-cell"><i class="fa-brands fa-copilot"></i></span>
+      <span class="btn-cell divider"><i class="fa-solid fa-chevron-down"></i></span>
+    </button>
+  </div>
+
+  <!-- 코파일럿 블록 ↔ + 블록 사이 구분선: header-search 밖으로 빼서
+       top-header의 gap:16px가 양쪽에 똑같이 적용되게 함 (정중앙 정렬) -->
+  <div class="divider-v"></div>
+
+  <div class="header-right">
+    <button class="icon-btn-outline plus-btn">
+      <span class="btn-cell"><i class="fa-solid fa-plus"></i></span>
+      <span class="btn-cell divider"><i class="fa-solid fa-chevron-down"></i></span>
+    </button>
+    <button class="icon-btn-outline">
+      <i class="fa-regular fa-circle-dot"></i>
+    </button>
+    <button class="icon-btn-outline">
+      <i class="fa-solid fa-code-pull-request"></i>
+    </button>
+    <button class="icon-btn-outline">
+      <i class="fa-solid fa-book-bookmark"></i>
+    </button>
+    <button class="icon-btn-outline">
+      <i class="fa-solid fa-inbox"></i>
+    </button>
+    <div class="divider-v"></div>
+    <span class="avatar"></span>
+  </div>
+</header>
+
+<!-- ============================================================
+     [전체 레이아웃] 사이드바(.sidebar) + 본문(.main)
+============================================================ -->
+<div class="layout">
+
+  <!-- ---------- 좌측 사이드바 ---------- -->
+  <aside class="sidebar">
+    <nav>
+      <div class="nav-item active">
+        <i class="fa-solid fa-user-group"></i>
+        My contributions
+      </div>
+      <div class="nav-item">
+        <i class="fa-solid fa-user"></i>
+        My repositories
+      </div>
+      <div class="nav-item">
+        <i class="fa-solid fa-code-fork"></i>
+        My forks
+      </div>
+      <div class="nav-item">
+        <i class="fa-solid fa-gear"></i>
+        Admin access
+      </div>
+    </nav>
+
+    <div class="nav-section">
+      <div class="nav-section-header">
+        <span class="nav-section-title"><i class="fa-solid fa-layer-group"></i>Views</span>
+        <i class="fa-solid fa-plus"></i>
+      </div>
+      <div class="no-saved-views">No saved views</div>
+    </div>
+
+    <div class="collapse-sidebar">
+      <svg viewBox="0 0 16 16" fill="#8b949e"><path d="M6.823 7.823a.25.25 0 0 1 0 .354l-2.396 2.396A.25.25 0 0 1 4 10.396V5.604a.25.25 0 0 1 .427-.177Z"/><path d="M1.75 0h12.5C15.216 0 16 .784 16 1.75v12.5A1.75 1.75 0 0 1 14.25 16H1.75A1.75 1.75 0 0 1 0 14.25V1.75C0 .784.784 0 1.75 0ZM1.5 1.75v12.5c0 .138.112.25.25.25H9.5v-13H1.75a.25.25 0 0 0-.25.25ZM11 14.5h3.25a.25.25 0 0 0 .25-.25V1.75a.25.25 0 0 0-.25-.25H11Z"/></svg>
+      Collapse sidebar
+    </div>
+  </aside>
+
+  <!-- ---------- 본문(main) 영역 ---------- -->
+  <main class="main">
+   <div class="main-inner">
+
+    <div class="main-header">
+      <h1>My contributions</h1>
+      <button class="btn-primary">New repository</button>
+    </div>
+
+    <div class="filter-bar">
+      <div class="filter-text">contributed-by:<span class="highlight">@me</span></div>
+      <i class="fa-solid fa-x clear-btn"></i>
+      <i class="fa-solid fa-magnifying-glass"></i>
+    </div>
+
+    <div class="repo-panel">
+
+      <div class="panel-header">
+        <span>5 repositories</span>
+        <div class="panel-header-right">
+          <div class="sort-dropdown">
+            <i class="fa-solid fa-arrow-down-wide-short"></i>
+            Relevance
+          </div>
+          <div class="view-toggle">
+            <button class="icon-btn">
+              <i class="fa-solid fa-bars"></i>
+            </button>
+            <button class="icon-btn">
+              <i class="fa-solid fa-table-cells-large"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="repo-row">
+        <div class="repo-main">
+          <div class="repo-name">
+            <span><span class="owner">test</span>/<span class="name">kant_study</span></span>
+            <span class="badge">Public</span>
+          </div>
+          <div class="repo-meta">
+            <span class="stat-item"><i class="fa-solid fa-code-fork"></i>0</span>
+            <span class="dot">·</span>
+            <span class="stat-item"><i class="fa-solid fa-star"></i>0</span>
+            <span class="dot">·</span>
+            <span class="stat-item"><i class="fa-regular fa-circle-dot"></i>12</span>
+            <span class="dot">·</span>
+            <span class="stat-item"><i class="fa-solid fa-code-pull-request"></i>2</span>
+            <span class="dot">·</span>
+            <span>Updated on Aug 6</span>
+          </div>
+        </div>
+        <svg class="sparkline" width="90" height="26" viewBox="0 0 90 26"><polyline points="0,18 15,17 30,19 45,15 60,16 72,8 90,3" fill="none" stroke="#3fb950" stroke-width="1.5"/></svg>
+      </div>
+
+      <div class="repo-row">
+        <div class="repo-main">
+          <div class="repo-name">
+            <span><span class="owner">user01</span>/<span class="name">work</span></span>
+            <span class="badge">Public</span>
+          </div>
+          <div class="repo-meta">
+            <span class="stat-item"><i class="fa-solid fa-code-fork"></i>0</span>
+            <span class="dot">·</span>
+            <span class="stat-item"><i class="fa-solid fa-star"></i>0</span>
+            <span class="dot">·</span>
+            <span class="stat-item"><i class="fa-regular fa-circle-dot"></i>0</span>
+            <span class="dot">·</span>
+            <span class="stat-item"><i class="fa-solid fa-code-pull-request"></i>0</span>
+            <span class="dot">·</span>
+            <span>Updated last month</span>
+            <span class="dot">·</span>
+            <span class="gear-icon"><i class="fa-solid fa-gear"></i></span>
+          </div>
+        </div>
+        <svg class="sparkline" width="90" height="26" viewBox="0 0 90 26"><polyline points="0,20 20,19 40,19 55,16 70,4 90,10" fill="none" stroke="#3fb950" stroke-width="1.5"/></svg>
+      </div>
+
+      <div class="repo-row">
+        <div class="repo-main">
+          <div class="repo-name">
+            <span><span class="owner">user01</span>/<span class="name">git</span></span>
+            <span class="badge">Public</span>
+          </div>
+          <div class="repo-meta">
+            <span class="stat-item"><i class="fa-solid fa-code-fork"></i>0</span>
+            <span class="dot">·</span>
+            <span class="stat-item"><i class="fa-solid fa-star"></i>0</span>
+            <span class="dot">·</span>
+            <span class="stat-item"><i class="fa-regular fa-circle-dot"></i>0</span>
+            <span class="dot">·</span>
+            <span class="stat-item"><i class="fa-solid fa-code-pull-request"></i>0</span>
+            <span class="dot">·</span>
+            <span>Updated on Aug 5</span>
+            <span class="dot">·</span>
+            <span class="gear-icon"><i class="fa-solid fa-gear"></i></span>
+          </div>
+        </div>
+        <svg class="sparkline" width="90" height="26" viewBox="0 0 90 26"><polyline points="0,19 20,20 40,18 55,17 70,6 90,3" fill="none" stroke="#3fb950" stroke-width="1.5"/></svg>
+      </div>
+
+      <div class="repo-row">
+        <div class="repo-main">
+          <div class="repo-name">
+            <span><span class="owner">user01</span>/<span class="name">test02</span></span>
+            <span class="badge">Public</span>
+          </div>
+          <div class="repo-meta">
+            <span class="lang-dot jupyter"></span><span>Jupyter Notebook</span>
+            <span class="dot">·</span>
+            <span class="stat-item"><i class="fa-solid fa-code-fork"></i>0</span>
+            <span class="dot">·</span>
+            <span class="stat-item"><i class="fa-solid fa-star"></i>0</span>
+            <span class="dot">·</span>
+            <span class="stat-item"><i class="fa-regular fa-circle-dot"></i>0</span>
+            <span class="dot">·</span>
+            <span class="stat-item"><i class="fa-solid fa-code-pull-request"></i>0</span>
+            <span class="dot">·</span>
+            <span>Updated 2 weeks ago</span>
+            <span class="dot">·</span>
+            <span class="gear-icon"><i class="fa-solid fa-gear"></i></span>
+          </div>
+        </div>
+        <svg class="sparkline" width="90" height="26" viewBox="0 0 90 26"><polyline points="0,19 20,19 40,20 55,19 70,15 90,3" fill="none" stroke="#3fb950" stroke-width="1.5"/></svg>
+      </div>
+
+      <div class="repo-row">
+        <div class="repo-main">
+          <div class="repo-name">
+            <span><span class="owner">user01</span>/<span class="name">work_2</span></span>
+            <span class="badge">Public</span>
+          </div>
+          <div class="repo-meta">
+            <span class="lang-dot python"></span><span>Python</span>
+            <span class="dot">·</span>
+            <span class="stat-item"><i class="fa-solid fa-code-fork"></i>0</span>
+            <span class="dot">·</span>
+            <span class="stat-item"><i class="fa-solid fa-star"></i>0</span>
+            <span class="dot">·</span>
+            <span class="stat-item"><i class="fa-regular fa-circle-dot"></i>0</span>
+            <span class="dot">·</span>
+            <span class="stat-item"><i class="fa-solid fa-code-pull-request"></i>0</span>
+            <span class="dot">·</span>
+            <span>Updated last week</span>
+            <span class="dot">·</span>
+            <span class="gear-icon"><i class="fa-solid fa-gear"></i></span>
+          </div>
+        </div>
+        <svg class="sparkline" width="90" height="26" viewBox="0 0 90 26"><polyline points="0,20 20,19 40,20 55,17 70,10 90,3" fill="none" stroke="#3fb950" stroke-width="1.5"/></svg>
+      </div>
+    </div>
+
+    <div class="tip-box">
+      <i class="fa-regular fa-lightbulb"></i>
+      <div><b>ProTip!</b> Using a comma within certain filters will aggregate the results. For example: <code>language:Go,Ruby</code> will show all repositories that have either Go or Ruby as their primary language.</div>
+    </div>
+   </div>
+  </main>
+</div>
+
+</body>
+</html>
