@@ -6,31 +6,62 @@
   <title>TODO 리스트</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="css/style.css" />
-  <script src="js/todo.js"></script>
+  <script src="js/todo.js" defer></script>
 </head>
 <body>
   <!-- 헤더 -->
   <header class="header px-5 py-3">
-    <h1 id="formTitle" class="font-semibold">To do List</h1>
+    <h1 class="font-semibold">To do List</h1>
   </header>
 
   <main class="mx-auto max-w-3xl p-5">
     <!-- 입력 폼 -->
-    <form name="todoForm" class="mb-8 flex flex-col gap-3">
-      <label class="row"><span>날짜</span><input type="date" name="date" class="field" /></label>
-      <label class="row"><span>제목</span><input type="text" name="subject" class="field" placeholder="제목 입력" /></label>
-      <label class="row"><span>내용</span><textarea name="content" class="field" placeholder="내용 입력"></textarea></label>
-      <div class="mt-2 flex justify-center gap-2">
-        <button id="submitBtn" class="btn w-1/2 bg-blue-500">등록하기</button>
-        <button type="button" id="cancelBtn" class="btn w-1/4 bg-slate-400">취소</button>
-      </div>
-    </form>
+    <section aria-labelledby="formTitle" class="mb-8">
+      <h2 id="formTitle" class="form-title mb-3">할일 등록</h2>
 
-    <!-- 현황 -->
-    <p id="statsText" class="mb-3 text-sm text-slate-500"></p>
+      <form id="todoForm" name="todoForm" class="flex flex-col gap-3" novalidate>
+        <label class="row">
+          <span>날짜</span>
+          <input type="date" name="date" class="field" required />
+        </label>
+        <label class="row">
+          <span>제목</span>
+          <input type="text" name="subject" class="field" placeholder="제목 입력" maxlength="50" required />
+        </label>
+        <label class="row">
+          <span>내용</span>
+          <textarea name="content" class="field" placeholder="내용 입력" required></textarea>
+        </label>
+
+        <!-- 입력 오류 메시지 (스크린리더가 바로 읽도록 aria-live) -->
+        <p id="formError" class="form-error" aria-live="polite"></p>
+
+        <div class="flex justify-center gap-2">
+          <button type="submit" id="submitBtn" class="btn w-1/2 bg-blue-500">등록하기</button>
+          <button type="button" id="cancelBtn" class="btn w-1/4 bg-slate-400">취소</button>
+        </div>
+      </form>
+    </section>
 
     <!-- 할일 목록 -->
-    <section id="todoList" class="grid gap-5 md:grid-cols-2"></section>
+    <section aria-labelledby="listTitle">
+      <div class="mb-3 flex flex-wrap items-center justify-between gap-2">
+        <h2 id="listTitle" class="sr-only">할일 목록</h2>
+
+        <!-- 조회 필터 -->
+        <div id="filterGroup" class="filter-group" role="group" aria-label="할일 조회 필터">
+          <button type="button" class="filter-btn" data-filter="all">전체</button>
+          <button type="button" class="filter-btn" data-filter="active">진행 중</button>
+          <button type="button" class="filter-btn" data-filter="done">완료</button>
+        </div>
+
+        <!-- 현황 -->
+        <p id="statsText" class="text-sm text-slate-500" aria-live="polite"></p>
+      </div>
+
+      <ul id="todoList" class="grid gap-5 md:grid-cols-2"></ul>
+      <p id="emptyText" class="empty-text" hidden></p>
+    </section>
   </main>
 </body>
 </html>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="GitHub Repositories 페이지 클론 코딩">
+<title>Repositories</title>
+<link rel="stylesheet" href="repo_style.css">
+<!-- Font Awesome 아이콘 (kit 하나로 통일) -->
+<script src="https://kit.fontawesome.com/b853f0ae27.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<!-- 키보드 사용자를 위한 본문 바로가기 링크 (Tab 을 누르면 나타남) -->
+<a class="skip-link" href="#main-content">본문 바로가기</a>
+
+<!-- ============================================================
+     [상단 헤더] 로고 + 검색창 + 우측 아이콘/아바타
+============================================================ -->
+<header class="top-header">
+  <button type="button" class="icon-btn" aria-label="메뉴 열기">
+    <i class="fa-solid fa-bars" aria-hidden="true"></i>
+  </button>
+
+  <a href="#" class="logo-title" aria-label="GitHub Repositories 홈">
+    <i class="fa-brands fa-github" aria-hidden="true"></i>
+    <span>Repositories</span>
+  </a>
+
+  <!-- 중앙 검색창 + 코파일럿 버튼 -->
+  <div class="header-search">
+    <form class="search-box" role="search" action="#" method="get">
+      <label for="site-search" class="sr-only">GitHub 검색</label>
+      <i class="fa-solid fa-magnifying-glass search-box-icon" aria-hidden="true"></i>
+      <div class="search-box-inner">
+        <input type="search" id="site-search" name="q" class="search-input" placeholder=" " autocomplete="off">
+        <!-- 장식용 안내 문구 (실제 이름은 위 label 이 제공) -->
+        <div class="fake-placeholder" aria-hidden="true">
+          <span>Type</span><span class="kbd">/</span><span class="hide-sm">to search</span>
+        </div>
+      </div>
+    </form>
+
+    <button type="button" class="icon-btn-outline copilot-btn hide-md" aria-label="Copilot 메뉴">
+      <span class="btn-cell"><i class="fa-brands fa-copilot" aria-hidden="true"></i></span>
+      <span class="btn-cell divider"><i class="fa-solid fa-chevron-down" aria-hidden="true"></i></span>
+    </button>
+  </div>
+
+  <!-- 코파일럿 블록 ↔ + 블록 사이 구분선: header-search 밖으로 빼서
+       top-header 의 gap 이 양쪽에 똑같이 적용되게 함 (정중앙 정렬) -->
+  <div class="divider-v hide-md" aria-hidden="true"></div>
+
+  <div class="header-right">
+    <button type="button" class="icon-btn-outline plus-btn hide-sm" aria-label="새로 만들기">
+      <span class="btn-cell"><i class="fa-solid fa-plus" aria-hidden="true"></i></span>
+      <span class="btn-cell divider"><i class="fa-solid fa-chevron-down" aria-hidden="true"></i></span>
+    </button>
+    <a href="#" class="icon-btn-outline hide-md" aria-label="Issues">
+      <i class="fa-regular fa-circle-dot" aria-hidden="true"></i>
+    </a>
+    <a href="#" class="icon-btn-outline hide-md" aria-label="Pull requests">
+      <i class="fa-solid fa-code-pull-request" aria-hidden="true"></i>
+    </a>
+    <a href="#" class="icon-btn-outline hide-md" aria-label="Repositories">
+      <i class="fa-solid fa-book-bookmark" aria-hidden="true"></i>
+    </a>
+    <a href="#" class="icon-btn-outline" aria-label="알림">
+      <i class="fa-solid fa-inbox" aria-hidden="true"></i>
+    </a>
+    <div class="divider-v hide-sm" aria-hidden="true"></div>
+    <button type="button" class="avatar" aria-label="내 계정 메뉴"></button>
+  </div>
+</header>
+
+<!-- ============================================================
+     [전체 레이아웃] 사이드바(.sidebar) + 콘텐츠(.content: main + footer)
+============================================================ -->
+<div class="layout">
+
+  <!-- ---------- 좌측 사이드바 ---------- -->
+  <aside class="sidebar" aria-label="저장소 메뉴">
+    <nav aria-label="저장소 분류">
+      <ul class="nav-list">
+        <li>
+          <a href="#" class="nav-item active" aria-current="page">
+            <i class="fa-solid fa-user-group" aria-hidden="true"></i>
+            My contributions
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-item">
+            <i class="fa-solid fa-user" aria-hidden="true"></i>
+            My repositories
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-item">
+            <i class="fa-solid fa-code-fork" aria-hidden="true"></i>
+            My forks
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-item">
+            <i class="fa-solid fa-gear" aria-hidden="true"></i>
+            Admin access
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <section class="nav-section" aria-labelledby="views-title">
+      <div class="nav-section-header">
+        <h2 id="views-title" class="nav-section-title">
+          <i class="fa-solid fa-layer-group" aria-hidden="true"></i>Views
+        </h2>
+        <button type="button" class="icon-btn-plain" aria-label="새 뷰 추가">
+          <i class="fa-solid fa-plus" aria-hidden="true"></i>
+        </button>
+      </div>
+      <p class="no-saved-views">No saved views</p>
+    </section>
+
+    <button type="button" class="collapse-sidebar">
+      <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M6.823 7.823a.25.25 0 0 1 0 .354l-2.396 2.396A.25.25 0 0 1 4 10.396V5.604a.25.25 0 0 1 .427-.177Z"/><path d="M1.75 0h12.5C15.216 0 16 .784 16 1.75v12.5A1.75 1.75 0 0 1 14.25 16H1.75A1.75 1.75 0 0 1 0 14.25V1.75C0 .784.784 0 1.75 0ZM1.5 1.75v12.5c0 .138.112.25.25.25H9.5v-13H1.75a.25.25 0 0 0-.25.25ZM11 14.5h3.25a.25.25 0 0 0 .25-.25V1.75a.25.25 0 0 0-.25-.25H11Z"/></svg>
+      Collapse sidebar
+    </button>
+  </aside>
+
+  <div class="content">
+    <!-- ---------- 본문(main) 영역 ---------- -->
+    <main id="main-content" class="main">
+      <div class="main-inner">
+
+        <div class="main-header">
+          <h1>My contributions</h1>
+          <a href="#" class="btn-primary">New repository</a>
+        </div>
+
+        <!-- 저장소 필터 검색 폼 -->
+        <form class="filter-bar" role="search" action="#" method="get">
+          <label for="repo-filter" class="sr-only">저장소 필터</label>
+          <input type="search" id="repo-filter" name="query" class="filter-input" value="contributed-by:@me">
+          <button type="reset" class="filter-icon-btn clear-btn" aria-label="필터 지우기">
+            <i class="fa-solid fa-x" aria-hidden="true"></i>
+          </button>
+          <button type="submit" class="filter-icon-btn" aria-label="필터 검색">
+            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          </button>
+        </form>
+
+        <section class="repo-panel" aria-labelledby="repo-count">
+          <div class="panel-header">
+            <h2 id="repo-count" class="panel-title">5 repositories</h2>
+            <div class="panel-header-right">
+              <button type="button" class="sort-dropdown" aria-label="정렬 기준: Relevance">
+                <i class="fa-solid fa-arrow-down-wide-short" aria-hidden="true"></i>
+                <span class="hide-sm">Relevance</span>
+              </button>
+              <div class="view-toggle" role="group" aria-label="보기 방식">
+                <button type="button" class="icon-btn" aria-label="목록으로 보기" aria-pressed="true">
+                  <i class="fa-solid fa-bars" aria-hidden="true"></i>
+                </button>
+                <button type="button" class="icon-btn" aria-label="카드로 보기" aria-pressed="false">
+                  <i class="fa-solid fa-table-cells-large" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <ul class="repo-list">
+            <li class="repo-row">
+              <div class="repo-main">
+                <h3 class="repo-name">
+                  <a href="#"><span class="owner">test</span>/<span class="name">kant_study</span></a>
+                  <span class="badge">Public</span>
+                </h3>
+                <ul class="repo-meta">
+                  <li class="stat-item"><i class="fa-solid fa-code-fork" aria-hidden="true"></i><span class="sr-only">Forks</span>0</li>
+                  <li class="stat-item"><i class="fa-solid fa-star" aria-hidden="true"></i><span class="sr-only">Stars</span>0</li>
+                  <li class="stat-item"><i class="fa-regular fa-circle-dot" aria-hidden="true"></i><span class="sr-only">Issues</span>12</li>
+                  <li class="stat-item"><i class="fa-solid fa-code-pull-request" aria-hidden="true"></i><span class="sr-only">Pull requests</span>2</li>
+                  <li><span>Updated on <time datetime="2026-08-06">Aug 6</time></span></li>
+                </ul>
+              </div>
+              <svg class="sparkline" width="90" height="26" viewBox="0 0 90 26" role="img" aria-label="최근 커밋 활동 그래프"><polyline points="0,18 15,17 30,19 45,15 60,16 72,8 90,3" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+            </li>
+
+            <li class="repo-row">
+              <div class="repo-main">
+                <h3 class="repo-name">
+                  <a href="#"><span class="owner">user01</span>/<span class="name">work</span></a>
+                  <span class="badge">Public</span>
+                </h3>
+                <ul class="repo-meta">
+                  <li class="stat-item"><i class="fa-solid fa-code-fork" aria-hidden="true"></i><span class="sr-only">Forks</span>0</li>
+                  <li class="stat-item"><i class="fa-solid fa-star" aria-hidden="true"></i><span class="sr-only">Stars</span>0</li>
+                  <li class="stat-item"><i class="fa-regular fa-circle-dot" aria-hidden="true"></i><span class="sr-only">Issues</span>0</li>
+                  <li class="stat-item"><i class="fa-solid fa-code-pull-request" aria-hidden="true"></i><span class="sr-only">Pull requests</span>0</li>
+                  <li>Updated last month</li>
+                  <li><a href="#" class="gear-icon" aria-label="user01/work 설정"><i class="fa-solid fa-gear" aria-hidden="true"></i></a></li>
+                </ul>
+              </div>
+              <svg class="sparkline" width="90" height="26" viewBox="0 0 90 26" role="img" aria-label="최근 커밋 활동 그래프"><polyline points="0,20 20,19 40,19 55,16 70,4 90,10" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+            </li>
+
+            <li class="repo-row">
+              <div class="repo-main">
+                <h3 class="repo-name">
+                  <a href="#"><span class="owner">user01</span>/<span class="name">git</span></a>
+                  <span class="badge">Public</span>
+                </h3>
+                <ul class="repo-meta">
+                  <li class="stat-item"><i class="fa-solid fa-code-fork" aria-hidden="true"></i><span class="sr-only">Forks</span>0</li>
+                  <li class="stat-item"><i class="fa-solid fa-star" aria-hidden="true"></i><span class="sr-only">Stars</span>0</li>
+                  <li class="stat-item"><i class="fa-regular fa-circle-dot" aria-hidden="true"></i><span class="sr-only">Issues</span>0</li>
+                  <li class="stat-item"><i class="fa-solid fa-code-pull-request" aria-hidden="true"></i><span class="sr-only">Pull requests</span>0</li>
+                  <li><span>Updated on <time datetime="2026-08-05">Aug 5</time></span></li>
+                  <li><a href="#" class="gear-icon" aria-label="user01/git 설정"><i class="fa-solid fa-gear" aria-hidden="true"></i></a></li>
+                </ul>
+              </div>
+              <svg class="sparkline" width="90" height="26" viewBox="0 0 90 26" role="img" aria-label="최근 커밋 활동 그래프"><polyline points="0,19 20,20 40,18 55,17 70,6 90,3" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+            </li>
+
+            <li class="repo-row">
+              <div class="repo-main">
+                <h3 class="repo-name">
+                  <a href="#"><span class="owner">user01</span>/<span class="name">test02</span></a>
+                  <span class="badge">Public</span>
+                </h3>
+                <ul class="repo-meta">
+                  <li class="lang"><span class="lang-dot jupyter" aria-hidden="true"></span>Jupyter Notebook</li>
+                  <li class="stat-item"><i class="fa-solid fa-code-fork" aria-hidden="true"></i><span class="sr-only">Forks</span>0</li>
+                  <li class="stat-item"><i class="fa-solid fa-star" aria-hidden="true"></i><span class="sr-only">Stars</span>0</li>
+                  <li class="stat-item"><i class="fa-regular fa-circle-dot" aria-hidden="true"></i><span class="sr-only">Issues</span>0</li>
+                  <li class="stat-item"><i class="fa-solid fa-code-pull-request" aria-hidden="true"></i><span class="sr-only">Pull requests</span>0</li>
+                  <li>Updated 2 weeks ago</li>
+                  <li><a href="#" class="gear-icon" aria-label="user01/test02 설정"><i class="fa-solid fa-gear" aria-hidden="true"></i></a></li>
+                </ul>
+              </div>
+              <svg class="sparkline" width="90" height="26" viewBox="0 0 90 26" role="img" aria-label="최근 커밋 활동 그래프"><polyline points="0,19 20,19 40,20 55,19 70,15 90,3" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+            </li>
+
+            <li class="repo-row">
+              <div class="repo-main">
+                <h3 class="repo-name">
+                  <a href="#"><span class="owner">user01</span>/<span class="name">work_2</span></a>
+                  <span class="badge">Public</span>
+                </h3>
+                <ul class="repo-meta">
+                  <li class="lang"><span class="lang-dot python" aria-hidden="true"></span>Python</li>
+                  <li class="stat-item"><i class="fa-solid fa-code-fork" aria-hidden="true"></i><span class="sr-only">Forks</span>0</li>
+                  <li class="stat-item"><i class="fa-solid fa-star" aria-hidden="true"></i><span class="sr-only">Stars</span>0</li>
+                  <li class="stat-item"><i class="fa-regular fa-circle-dot" aria-hidden="true"></i><span class="sr-only">Issues</span>0</li>
+                  <li class="stat-item"><i class="fa-solid fa-code-pull-request" aria-hidden="true"></i><span class="sr-only">Pull requests</span>0</li>
+                  <li>Updated last week</li>
+                  <li><a href="#" class="gear-icon" aria-label="user01/work_2 설정"><i class="fa-solid fa-gear" aria-hidden="true"></i></a></li>
+                </ul>
+              </div>
+              <svg class="sparkline" width="90" height="26" viewBox="0 0 90 26" role="img" aria-label="최근 커밋 활동 그래프"><polyline points="0,20 20,19 40,20 55,17 70,10 90,3" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+            </li>
+          </ul>
+        </section>
+
+        <aside class="tip-box" aria-label="도움말">
+          <i class="fa-regular fa-lightbulb" aria-hidden="true"></i>
+          <p><b>ProTip!</b> Using a comma within certain filters will aggregate the results. For example: <code>language:Go,Ruby</code> will show all repositories that have either Go or Ruby as their primary language.</p>
+        </aside>
+      </div>
+    </main>
+
+    <!-- ---------- 푸터 ---------- -->
+    <footer class="site-footer">
+      <div class="footer-brand">
+        <i class="fa-brands fa-github" aria-hidden="true"></i>
+        <small>&copy; 2026 GitHub, Inc.</small>
+      </div>
+      <nav aria-label="사이트 정보">
+        <ul class="footer-links">
+          <li><a href="#">Terms</a></li>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Security</a></li>
+          <li><a href="#">Status</a></li>
+          <li><a href="#">Community</a></li>
+          <li><a href="#">Docs</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+    </footer>
+  </div>
+</div>
+
+</body>
+</html>

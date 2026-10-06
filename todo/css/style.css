@@ -1,7 +1,26 @@
+/* ============================================================
+   색상·크기 변수 (한 곳에서 바꾸면 전체에 반영)
+============================================================ */
+:root {
+  --color-text: #333333;
+  --color-muted: #64748b;
+  --color-border: #e2e8f0;
+  --color-border-light: #f1f5f9;
+  --color-header-bg: #c8f2c2;
+  --color-header-text: #1f4d1a;
+  --color-success: #22c55e;
+  --color-accent: #6366f1;
+  --color-accent-bg: #eef2ff;
+  --color-danger: #ef4444;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --font-sm: 14px;
+}
+
 /* 기본 */
 body {
   font-family: "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
-  color: #333333;
+  color: var(--color-text);
 }
 
 button {
@@ -12,10 +31,23 @@ button:hover {
   opacity: 0.8;
 }
 
+/* 키보드로 이동할 때 포커스 위치가 보이도록 */
+button:focus-visible,
+.field:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
 /* 헤더 */
 .header {
-  background-color: #c8f2c2;
-  color: #1f4d1a;
+  background-color: var(--color-header-bg);
+  color: var(--color-header-text);
+}
+
+/* 폼 제목 */
+.form-title {
+  font-size: 16px;
+  font-weight: 600;
 }
 
 /* 입력 줄 */
@@ -23,7 +55,7 @@ button:hover {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  font-size: 14px;
+  font-size: var(--font-sm);
   font-weight: 600;
 }
 
@@ -34,71 +66,108 @@ button:hover {
 .field {
   flex: 1;
   padding: 10px;
-  border: 1px solid #e2e8f0;
-  border-radius: 6px;
-  font-size: 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: var(--font-sm);
   font-weight: 400;
 }
 
 .field:focus {
   outline: none;
-  border-color: #6366f1;
+  border-color: var(--color-accent);
 }
 
 textarea.field {
   height: 70px;
+  resize: vertical;
 }
 
-/* 768px 이상이면 라벨과 입력칸을 가로로 */
-@media (min-width: 768px) {
-  .row {
-    flex-direction: row;
-    align-items: center;
-  }
+/* 입력 오류 메시지 */
+.form-error {
+  min-height: 18px;
+  color: var(--color-danger);
+  font-size: 13px;
 }
 
 /* 버튼 */
 .btn {
   padding: 8px;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   color: #ffffff;
-  font-size: 14px;
+  font-size: var(--font-sm);
 }
 
 #cancelBtn {
   display: none;
 }
 
+/* 조회 필터 */
+.filter-group {
+  display: inline-flex;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.filter-btn {
+  padding: 6px 14px;
+  background-color: #ffffff;
+  color: var(--color-muted);
+  font-size: 13px;
+}
+
+.filter-btn + .filter-btn {
+  border-left: 1px solid var(--color-border);
+}
+
+.filter-btn.active {
+  background-color: var(--color-success);
+  color: #ffffff;
+  font-weight: 600;
+}
+
 /* 할일 카드 */
 .card {
   padding: 10px;
-  border: 1px solid #e2e8f0;
-  border-radius: 6px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
   background-color: #ffffff;
 }
 
 .card-title {
-  color: #22c55e;
-  font-size: 14px;
+  color: var(--color-success);
+  font-size: var(--font-sm);
   font-weight: 600;
+  word-break: break-all;
 }
 
 .card-text {
   min-height: 70px;
   margin-bottom: 8px;
   padding: 10px;
-  border: 1px solid #f1f5f9;
-  border-radius: 4px;
-  font-size: 14px;
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-sm);
+  white-space: pre-wrap; /* 입력한 줄바꿈 유지 */
+  word-break: break-all;
 }
 
 .check-btn {
+  flex-shrink: 0;
   width: 20px;
   height: 20px;
   border: 2px solid #cbd5e1;
   border-radius: 50%;
   color: #ffffff;
   font-size: 11px;
+  line-height: 1;
+}
+
+.empty-text {
+  padding: 40px 0;
+  color: var(--color-muted);
+  font-size: var(--font-sm);
+  text-align: center;
 }
 
 /* 완료된 카드 */
@@ -111,13 +180,13 @@ textarea.field {
 }
 
 .done .check-btn {
-  background-color: #22c55e;
-  border-color: #22c55e;
+  background-color: var(--color-success);
+  border-color: var(--color-success);
 }
 
 /* 수정 모드 */
 .edit-mode #submitBtn {
-  background-color: #6366f1;
+  background-color: var(--color-accent);
 }
 
 .edit-mode #cancelBtn {
@@ -125,6 +194,16 @@ textarea.field {
 }
 
 .editing {
-  border-color: #6366f1;
-  background-color: #eef2ff;
+  border-color: var(--color-accent);
+  background-color: var(--color-accent-bg);
+}
+
+/* ============================================================
+   반응형: 768px 이상이면 라벨과 입력칸을 가로로
+============================================================ */
+@media (min-width: 768px) {
+  .row {
+    flex-direction: row;
+    align-items: center;
+  }
 }
